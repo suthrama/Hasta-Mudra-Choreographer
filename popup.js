@@ -6,6 +6,7 @@ function handleFileSelect(event) {
     const reader = new FileReader();
     reader.onload = function(e) {
       const lyrics = e.target.result;
+      console.log('Lyrics loaded:', lyrics);  // Debug log
       displayLyrics(lyrics);
     };
     reader.readAsText(file);
@@ -25,32 +26,47 @@ function displayLyrics(lyrics) {
     lyricsOutput.appendChild(wordElement);
 
     // Fetch and display mudra for each word
-    getMudra(word).then(mudra => {
+    getMudra(word).then(mudraData => {
+      console.log('Mudra for word', word, ':', mudraData);  // Debug log
       const mudraElement = document.createElement('div');
-      mudraElement.textContent = `${word}: ${mudra}`;
+      mudraElement.className = 'mudra';
+      mudraElement.innerHTML = `
+        <img src="${mudraData.image}" alt="${mudraData.mudra}">
+        <span>${word}z ${mudraData.mudra}</span>
+      `;
       mudrasOutput.appendChild(mudraElement);
+      highlightWord(wordElement);
+    }).catch(error => {
+      console.error('Error fetching mudra for word', word, ':', error);  // Error handling
     });
   });
 }
 
 async function getMudra(word) {
-  const apiKey = '' //API KEY !!!;
-  const endpoint = 'https://api.openai.com/v1/engines/davinci-codex/completions';
+  try {
+    const response = await fetch('http://localhost:3000/get-mudra', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ word })
+    });
 
-  const response = await fetch(endpoint, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${apiKey}`
-    },
-    body: JSON.stringify({
-      prompt: `What is the Kuchipudi hand gesture (mudra) for the word "${word}"? Format like this: "${word}": name of mudra`,
-      max_tokens: 10,
-      temperature: 0.5
-    })
-  });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
 
-  const data = await response.json();
-  const mudra = data.choices[0].text.trim();
-  return mudra || 'Unknown mudra';
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error in getMudra:', error);  // Error handling
+    return { mudra: '', image: 'https://www.naatyaanjali.com/wp-content/uploads/2015/02/' + word + '.jpg' };
+  }
+}
+
+function highlightWord(wordElement) {
+  wordElement.classList.add('highlight');
+  setTimeout(() => {
+    wordElement.classList.remove('highlight');
+  }, 2000);
 }

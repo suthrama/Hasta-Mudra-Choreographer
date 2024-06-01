@@ -1,0 +1,30 @@
+body {
+  font-family: Arial, sans-serif;
+  width: 300px;
+  padding: 10px;
+}
+
+#lyricsOutput {
+  margin-top: 10px;
+  white-space: pre-wrap;
+}
+
+.highlight {
+  background-color: yellow;
+}
+
+#mudrasOutput {
+  margin-top: 10px;
+}
+
+.mudra {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.mudra img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
