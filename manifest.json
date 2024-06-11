@@ -1,12 +1,16 @@
-  {
+ {
+    "//header_comment": "Ananya Suthram",
+    "//header_comment2": "6/11/2024",
+    "//header_comment3": "This is the sole way to have a header comment.",
+    "//header_comment4": "The following code is the Manifest File for the project. Crucial Document to create a chome extension, as it is how it is able to read the code.",
+
     "manifest_version": 3,
     "name": "Mudra Choreographer",
-    "version": "1.0",
+    "version": "5.0",
     "description": "choreograph kuchipudi hasta mudras for audio transcript",
-    "permissions": ["activeTab", "storage"],
+    "permissions": ["activeTab", "storage", "downloads"],
     "action": {
-      "default_popup": "popup.html",
-      "default_icon": "images/dancer.png"
+      "default_popup": "popup.html"
     },
     "background": {
       "service_worker": "background.js",

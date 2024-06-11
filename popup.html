@@ -1,15 +1,36 @@
+<!--
+  Ananya Suthram
+  6/11/2024
+
+  This is the HTML File that gets displayed within the chrome extension popup window.
+  It creates the UI elements (download button / upload file button), connects to 
+  css elements and acts as the glue for the whole project
+-->
+
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Kuchipudi Mudras</title>
-  <link rel="stylesheet" type="text/css" href="styles.css">
-</head>
-<body>
-  <h1>Mudra Suggestions</h1>
-  <input type="file" id="fileInput" accept=".txt">
-  <div id="lyricsOutput"></div>
-  <div id="mudrasOutput"></div>
-  <script src="popup.js"></script>
-</body>
-</html>
+  <head>
+    <title>Kuchipudi Mudras</title>
 
+    <!-- Link to the external CSS file for styling -->
+    <link rel="stylesheet" type="text/css" href="styles.css">
+  </head>
+  <body>
+    <h1>Mudra Suggestions</h1>
+  
+    <!-- File input element for selecting a text file -->
+    <input type="file" id="fileInput" accept=".txt">
+
+    <!-- Div element to display the lyrics from the selected file -->
+    <div id="lyricsOutput"></div>
+
+    <!-- Div element to display the mudra images and descriptions -->
+    <div id="mudrasOutput"></div>
+
+    <!-- Button to trigger downloading the displayed content -->
+    <button id="download-button">Download Content</button>
+
+    <!-- Link to the external JavaScript file for handling the main functionality -->
+    <script src="background.js"></script>
+  </body>
+</html>

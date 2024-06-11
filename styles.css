@@ -1,28 +1,42 @@
+/*
+    Ananya Suthram
+    6/11/2024
+
+    styles.css is a stylesheet for the layout and presentation of the lyrics and mudras output as seen in background.js
+
+*/
+
+/* creates a fixed set of rules for all things in the document/body */
 body {
   font-family: Arial, sans-serif;
   width: 300px;
   padding: 10px;
 }
 
+/* adds a margin of 10 pixels on top of the lyrics output container and enables automatic wrapping of text to fit within the container */
 #lyricsOutput {
   margin-top: 10px;
   white-space: pre-wrap;
 }
 
+/* crucial for the highlightWord(wordElement) function as seen in background.js */
 .highlight {
   background-color: yellow;
 }
 
+/* adds a margin of 10 pixels on top of the mudras output container */
 #mudrasOutput {
   margin-top: 10px;
 }
 
+/* arranges mudra elements in a flex container with vertical alignment and sets a margin of 5 pixels at the bottom of each mudra element. */
 .mudra {
   display: flex;
   align-items: center;
   margin-bottom: 5px;
 }
 
+/* ensures that all displayed images are uniform */
 .mudra img {
   width: 50px;
   height: 50px;
